@@ -38,6 +38,19 @@ public class ApiController {
         }
     }
 
+    @DeleteMapping(value = "/product/{id}")
+    public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) {
+        Optional<ProductInfo> found = repository.findById(id);
+
+        if(found.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+    }
+
     @PostMapping(value = "/products")
     public ResponseEntity<ProductInfo> save(@RequestBody ProductInfo productInfo) {
         ProductInfo saved = repository.save(productInfo);
