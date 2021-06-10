@@ -10,4 +10,5 @@ public interface ProductInfoRepository extends
         CrudRepository<ProductInfo, String> {
 
     Optional<ProductInfo> findById(String id);
+    Iterable<ProductInfo> findAll();
 }
