@@ -21,7 +21,7 @@ dependencies {
 	implementation 'com.github.derjust:spring-data-dynamodb:5.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.data:spring-data-releasetrain:Lovelace-SR16'
-	implementation 'junit:junit:4.13.1'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 }
