@@ -11,4 +11,5 @@ public interface ProductInfoRepository extends
 
     Optional<ProductInfo> findById(String id);
     Iterable<ProductInfo> findAll();
+    ProductInfo save(ProductInfo productInfo);
 }
