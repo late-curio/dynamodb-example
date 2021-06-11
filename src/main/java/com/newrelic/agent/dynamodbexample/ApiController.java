@@ -30,10 +30,9 @@ public class ApiController {
     public ResponseEntity<ProductInfo> getById(@PathVariable String id) {
         Optional<ProductInfo> found = repository.findById(id);
 
-        if(found.isEmpty()) {
+        if (found.isEmpty()) {
             return ResponseEntity.notFound().build();
-        }
-        else {
+        } else {
             return new ResponseEntity<>(found.get(), HttpStatus.OK);
         }
     }
@@ -42,10 +41,9 @@ public class ApiController {
     public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) {
         Optional<ProductInfo> found = repository.findById(id);
 
-        if(found.isEmpty()) {
+        if (found.isEmpty()) {
             return ResponseEntity.notFound().build();
-        }
-        else {
+        } else {
             repository.deleteById(id);
             return ResponseEntity.ok().build();
         }

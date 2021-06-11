@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.0'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 group = 'com.newrelic.agent'
@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 //	maven {
 //		url "https://s3.us-west-2.amazonaws.com/dynamodb-local/release"
 //	}
@@ -17,15 +17,15 @@ repositories {
 
 dependencies {
 //	implementation 'com.amazonaws:DynamoDBLocal:1.12.0'
-	implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.106'
-	implementation 'com.github.derjust:spring-data-dynamodb:5.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.data:spring-data-releasetrain:Lovelace-SR16'
+    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.106'
+    implementation 'com.github.derjust:spring-data-dynamodb:5.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.data:spring-data-releasetrain:Lovelace-SR16'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

@@ -27,25 +27,22 @@ import static org.hamcrest.Matchers.*;
 @TestPropertySource(properties = {
         "amazon.dynamodb.endpoint=http://localhost:8000/",
         "amazon.aws.accesskey=test1",
-        "amazon.aws.secretkey=test231" })
+        "amazon.aws.secretkey=test231"})
 public class ProductInfoRepositoryIntegrationTest {
-
-    private DynamoDBMapper dynamoDBMapper;
-
-    @Autowired
-    private AmazonDynamoDB amazonDynamoDB;
-
-    @Autowired
-    ProductInfoRepository repository;
 
     private static final String EXPECTED_COST = "20";
     private static final String EXPECTED_PRICE = "50";
+    @Autowired
+    ProductInfoRepository repository;
+    private DynamoDBMapper dynamoDBMapper;
+    @Autowired
+    private AmazonDynamoDB amazonDynamoDB;
 
     @BeforeEach
     public void setup() {
         List<String> tableNames = amazonDynamoDB.listTables().getTableNames();
 
-        if(!tableNames.isEmpty()) {
+        if (!tableNames.isEmpty()) {
             return;
         }
 
