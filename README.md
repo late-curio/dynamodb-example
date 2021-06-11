@@ -47,11 +47,7 @@ https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz
 
 ### Get products (async)
 
-`curl http://localhost:8080/async/products/<product-id>,<product-id>,<product-id>`
-
-### Add product (async)
-
-`curl --header "Content-Type: application/json" -d "{\"msrp\":\"\$15.00\", \"cost\":\"\$5.00\"}" http://localhost:8080/products`
+`curl http://localhost:8080/async/products?ids=<product-id>,<product-id>,<product-id>`
 
 ### Get product (async)
 

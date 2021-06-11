@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
-public class ProductController {
+public class ApiController {
 
     private final ProductInfoRepository repository;
 
-    public ProductController(ProductInfoRepository repository) {
+    public ApiController(ProductInfoRepository repository) {
         this.repository = repository;
     }
 

@@ -34,15 +34,6 @@ public class AsyncProductInfoRepository {
         return ids.stream().map(this::findById).collect(Collectors.toList());
     }
 
-    public Iterable<ProductInfo> findAll() {
-
-        return List.of();
-    }
-
-    public ProductInfo save(ProductInfo productInfo) {
-        return productInfo;
-    }
-
     public void deleteById(String id) {
         Map<String, AttributeValue> key = new HashMap<>();
         AttributeValue idValue = new AttributeValue(id);

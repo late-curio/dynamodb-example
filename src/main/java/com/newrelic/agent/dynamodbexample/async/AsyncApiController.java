@@ -25,13 +25,6 @@ public class AsyncApiController {
         this.repository = repository;
     }
 
-//    @GetMapping(value = "/async/products", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<ProductInfo> getAll() {
-//        Iterable<ProductInfo> all = repository.findAll();
-//
-//        return StreamSupport.stream(all.spliterator(), false).collect(Collectors.toList());
-//    }
-
     @GetMapping(value = "/async/products")
     public List<ProductInfo> getAllById(@RequestParam(name = "ids") List<String> ids) {
         return repository.findAllByIds(ids).stream()
@@ -62,12 +55,5 @@ public class AsyncApiController {
     public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) {
         repository.deleteById(id);
         return ok().build();
-    }
-
-    @PostMapping(value = "/async/products")
-    public ResponseEntity<ProductInfo> save(@RequestBody ProductInfo productInfo) {
-        ProductInfo saved = repository.save(productInfo);
-
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 }
