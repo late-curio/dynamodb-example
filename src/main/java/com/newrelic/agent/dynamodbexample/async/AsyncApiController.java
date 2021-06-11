@@ -40,6 +40,7 @@ public class AsyncApiController {
 
     @DeleteMapping(value = "/async/product/{id}")
     public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) {
+        repository.deleteById(id);
         return ok().build();
     }
 

@@ -6,14 +6,13 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.newrelic.agent.dynamodbexample.ProductInfo;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @Repository
@@ -30,15 +29,14 @@ public class AsyncProductInfoRepository {
         AttributeValue idValue = new AttributeValue(id);
         key.put("id", idValue);
         GetItemRequest request = new GetItemRequest("ProductInfo", key);
-        ProductInfoAsyncResultHandler handler = new ProductInfoAsyncResultHandler();
-        Future<GetItemResult> future = client.getItemAsync(request, handler);
+        Future<GetItemResult> future = client.getItemAsync(request);
         CompletableFuture<GetItemResult> completableFuture = FutureTransformer.makeCompletableFuture(future);
-        //GetItemResult result = future.get();
-        //System.out.println("Result is " + result);
         return Mono.fromFuture(completableFuture).map(ProductInfo::from);
     }
 
-
+    public Flux<ProductInfo> findAllByIds(List<String> ids) {
+        return Flux.fromIterable(ids).flatMap(this::findById);
+    }
 
     public Iterable<ProductInfo> findAll() {
 
@@ -50,6 +48,9 @@ public class AsyncProductInfoRepository {
     }
 
     public void deleteById(String id) {
-
+        Map<String, AttributeValue> key = new HashMap<>();
+        AttributeValue idValue = new AttributeValue(id);
+        key.put("id", idValue);
+        client.deleteItemAsync("ProductInfo", key);
     }
 }
