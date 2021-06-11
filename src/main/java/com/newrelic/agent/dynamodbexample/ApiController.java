@@ -53,6 +53,6 @@ public class ApiController {
     public ResponseEntity<ProductInfo> save(@RequestBody ProductInfo productInfo) {
         ProductInfo saved = repository.save(productInfo);
 
-        return new ResponseEntity<ProductInfo>(saved, HttpStatus.CREATED);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 }
