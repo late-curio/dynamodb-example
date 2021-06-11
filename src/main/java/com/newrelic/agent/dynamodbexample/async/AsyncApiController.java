@@ -2,23 +2,16 @@ package com.newrelic.agent.dynamodbexample.async;
 
 import com.amazonaws.services.dynamodbv2.model.GetItemResult;
 import com.newrelic.agent.dynamodbexample.ProductInfo;
-import com.newrelic.agent.dynamodbexample.ProductInfoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
@@ -59,7 +52,7 @@ public class AsyncApiController {
     @GetMapping(value = "/async/product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductInfo> getById(@PathVariable String id) throws ExecutionException, InterruptedException {
         ProductInfo productInfo = ProductInfo.from(repository.findById(id).get());
-        if(productInfo.equals(ProductInfo.NOT_FOUND)) {
+        if (productInfo.equals(ProductInfo.NOT_FOUND)) {
             return notFound().build();
         }
         return ok(productInfo);

@@ -27,7 +27,7 @@ public class ProductInfo {
 
     public static ProductInfo from(GetItemResult result) {
         Map<String, AttributeValue> item = result.getItem();
-        if(item == null) {
+        if (item == null) {
             return NOT_FOUND;
         }
         String cost = item.get("cost").getS();

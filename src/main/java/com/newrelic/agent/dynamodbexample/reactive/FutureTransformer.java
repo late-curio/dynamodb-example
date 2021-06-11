@@ -43,7 +43,8 @@ public class FutureTransformer {
     private static void awaitFutureIsDoneInForkJoinPool(Future<?> future)
             throws InterruptedException {
         ForkJoinPool.managedBlock(new ForkJoinPool.ManagedBlocker() {
-            @Override public boolean block() throws InterruptedException {
+            @Override
+            public boolean block() throws InterruptedException {
                 try {
                     future.get();
                 } catch (ExecutionException e) {
@@ -51,7 +52,9 @@ public class FutureTransformer {
                 }
                 return true;
             }
-            @Override public boolean isReleasable() {
+
+            @Override
+            public boolean isReleasable() {
                 return future.isDone();
             }
         });
