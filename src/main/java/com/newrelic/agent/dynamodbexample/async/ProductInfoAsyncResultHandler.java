@@ -24,6 +24,7 @@ public class ProductInfoAsyncResultHandler implements AsyncHandler<GetItemReques
 
     @Override
     public void onSuccess(GetItemRequest request, GetItemResult getItemResult) {
+        System.out.println("Setting result...");
         result = ProductInfo.from(getItemResult);
     }
 }

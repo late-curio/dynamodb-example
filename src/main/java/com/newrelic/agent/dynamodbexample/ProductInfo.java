@@ -11,6 +11,8 @@ import java.util.Map;
 
 @DynamoDBTable(tableName = "ProductInfo")
 public class ProductInfo {
+    public final static ProductInfo NOT_FOUND = new ProductInfo();
+
     private String id;
     private String msrp;
     private String cost;
@@ -19,13 +21,15 @@ public class ProductInfo {
     }
 
     public ProductInfo(String cost, String price) {
-        this.id = id;
         this.cost = cost;
         this.msrp = price;
     }
 
     public static ProductInfo from(GetItemResult result) {
         Map<String, AttributeValue> item = result.getItem();
+        if(item == null) {
+            return NOT_FOUND;
+        }
         String cost = item.get("cost").getS();
         String msrp = item.get("msrp").getS();
         String id = item.get("id").getS();

@@ -6,12 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 public class AsyncApiController {
@@ -30,26 +34,13 @@ public class AsyncApiController {
     }
 
     @GetMapping(value = "/async/product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductInfo> getById(@PathVariable String id) throws ExecutionException, InterruptedException {
-        Optional<ProductInfo> found = repository.findById(id);
-
-        if (found.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return new ResponseEntity<>(found.get(), HttpStatus.OK);
-        }
+    public Mono<ProductInfo> getById(@PathVariable String id) {
+        return repository.findById(id);
     }
 
     @DeleteMapping(value = "/async/product/{id}")
-    public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) throws ExecutionException, InterruptedException {
-        Optional<ProductInfo> found = repository.findById(id);
-
-        if (found.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            repository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
+    public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) {
+        return ok().build();
     }
 
     @PostMapping(value = "/async/products")
