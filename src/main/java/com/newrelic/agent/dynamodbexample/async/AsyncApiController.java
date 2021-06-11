@@ -33,7 +33,7 @@ public class AsyncApiController {
 //    }
 
     @GetMapping(value = "/async/products")
-    public List<ProductInfo> getAllById(@RequestParam("ids") List<String> ids) {
+    public List<ProductInfo> getAllById(@RequestParam(name = "ids") List<String> ids) {
         return repository.findAllByIds(ids).stream()
                 .map(this::from)
                 .filter(Objects::nonNull)

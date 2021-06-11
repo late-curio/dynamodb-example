@@ -20,7 +20,7 @@ public class ReactiveApiController {
     }
 
     @GetMapping(value = "/reactive/products")
-    public Flux<ProductInfo> getAllById(@RequestParam("ids") List<String> ids) {
+    public Flux<ProductInfo> getAllById(@RequestParam(name = "ids") List<String> ids) {
         return repository.findAllByIds(ids);
     }
 

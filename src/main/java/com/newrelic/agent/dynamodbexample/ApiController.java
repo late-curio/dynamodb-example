@@ -20,9 +20,14 @@ public class ApiController {
     }
 
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductInfo> getAll() {
-        Iterable<ProductInfo> all = repository.findAll();
-
+    public List<ProductInfo> getAllById(@RequestParam(name = "ids", required = false) List<String> ids)  {
+        Iterable<ProductInfo> all;
+        if(ids == null || ids.isEmpty()) {
+            all = repository.findAll();
+        }
+        else {
+            all = repository.findAllById(ids);
+        }
         return StreamSupport.stream(all.spliterator(), false).collect(Collectors.toList());
     }
 
