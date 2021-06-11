@@ -37,16 +37,4 @@ public class ReactiveProductInfoRepository {
     public Flux<ProductInfo> findAllByIds(List<String> ids) {
         return Flux.fromIterable(ids).flatMap(this::findById);
     }
-
-    public Iterable<ProductInfo> findAll() {
-
-        return List.of();
-    }
-
-    public ProductInfo save(ProductInfo productInfo) {
-        return productInfo;
-    }
-
-    public void deleteById(String id) {
-    }
 }

@@ -28,14 +28,4 @@ public class ReactiveApiController {
     public Mono<ProductInfo> getById(@PathVariable String id) {
         return repository.findById(id);
     }
-
-    @DeleteMapping(value = "/reactive/product/{id}")
-    public ResponseEntity<ProductInfo> deleteById(@PathVariable String id) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
-
-    @PostMapping(value = "/reactive/products")
-    public ResponseEntity<ProductInfo> save(@RequestBody ProductInfo productInfo) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
 }

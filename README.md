@@ -58,6 +58,17 @@ https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz
 `curl -X "DELETE" http://localhost:8080/async/product/<product-id>`
 
 
+## "Reactive" API
+
+### Get products (async)
+
+`curl http://localhost:8080/reactive/products?ids=<product-id>,<product-id>,<product-id>`
+
+### Get product (async)
+
+`curl http://localhost:8080/reactive/product/<product-id>`
+
+
 ## Base example code derived from Baeldung
 
 https://www.baeldung.com/spring-data-dynamodb
