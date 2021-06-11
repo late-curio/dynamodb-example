@@ -34,6 +34,25 @@ https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz
 
 `curl -X "DELETE" http://localhost:8080/product/<product-id>`
 
+*** Async versions In progress ***
+
+### List all products in database (async)
+
+`curl http://localhost:8080/async/products`
+
+### Add product (async)
+
+`curl --header "Content-Type: application/json" -d "{\"msrp\":\"\$15.00\", \"cost\":\"\$5.00\"}" http://localhost:8080/products`
+
+### Get product (async)
+
+`curl http://localhost:8080/async/product/<product-id>`
+
+### Delete product (async)
+
+`curl -X "DELETE" http://localhost:8080/async/product/<product-id>`
+
+
 ## Base example code derived from Baeldung
 
 https://www.baeldung.com/spring-data-dynamodb
