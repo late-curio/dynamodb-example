@@ -16,7 +16,7 @@ https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz
 
 `./gradlew bootRun`
 
-## Exercise API
+## Synchronous API
 
 ### List all products in database
 
@@ -24,21 +24,30 @@ https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz
 
 ### Add product
 
-`curl --header "Content-Type: application/json" -d "{\"msrp\":\"\$15.00\", \"cost\":\"\$5.00\"}" http://localhost:8080/products`
+`curl --header "Content-Type: application/json" -d "{\"msrp\":\"\$15.00\", \"cost\":\"\$5.00\"}" http://localhost:8080/product`
 
 ### Get product
 
 `curl http://localhost:8080/product/<product-id>`
 
+### Get products
+
+`curl http://localhost:8080/products?ids=<product-id>,<product-id>,<product-id>`
+
 ### Delete product
 
 `curl -X "DELETE" http://localhost:8080/product/<product-id>`
 
-*** Async versions In progress ***
+### Delete ALL products
 
-### List all products in database (async)
+`curl -X "DELETE" http://localhost:8080/products`
 
-`curl http://localhost:8080/async/products`
+
+## Asynchronous API
+
+### Get products (async)
+
+`curl http://localhost:8080/async/products/<product-id>,<product-id>,<product-id>`
 
 ### Add product (async)
 

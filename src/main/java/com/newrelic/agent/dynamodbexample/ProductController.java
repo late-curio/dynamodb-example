@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
-public class ApiController {
+public class ProductController {
 
     private final ProductInfoRepository repository;
 
-    public ApiController(ProductInfoRepository repository) {
+    public ProductController(ProductInfoRepository repository) {
         this.repository = repository;
     }
 
@@ -31,6 +31,19 @@ public class ApiController {
         return StreamSupport.stream(all.spliterator(), false).collect(Collectors.toList());
     }
 
+    @PostMapping(value = "/products")
+    public ResponseEntity<ProductInfo> save(@RequestBody ProductInfo productInfo) {
+        ProductInfo saved = repository.save(productInfo);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    }
+
+    // same as above but not pluralized
+    @PostMapping(value = "/product")
+    public ResponseEntity<ProductInfo> create(@RequestBody ProductInfo productInfo) {
+        ProductInfo saved = repository.save(productInfo);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    }
+
     @GetMapping(value = "/product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductInfo> getById(@PathVariable String id) {
         Optional<ProductInfo> found = repository.findById(id);
@@ -40,6 +53,11 @@ public class ApiController {
         } else {
             return new ResponseEntity<>(found.get(), HttpStatus.OK);
         }
+    }
+
+    @DeleteMapping(value = "/products")
+    public void deleteAll() {
+        repository.deleteAll();
     }
 
     @DeleteMapping(value = "/product/{id}")
@@ -52,12 +70,5 @@ public class ApiController {
             repository.deleteById(id);
             return ResponseEntity.ok().build();
         }
-    }
-
-    @PostMapping(value = "/products")
-    public ResponseEntity<ProductInfo> save(@RequestBody ProductInfo productInfo) {
-        ProductInfo saved = repository.save(productInfo);
-
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 }
